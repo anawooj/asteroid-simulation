@@ -10,9 +10,6 @@ import java.awt.*;
 
 public class CenterPanel {
 
-    // NAPRAWIONO: wczesniej "mapPanel" byl zmienna lokalna w
-    // buildCenterPanel() - nie dalo sie do niego dotrzec z getImpactLocation()
-    // / setResult(), bo te metody w ogole nie istnialy.
     private ImpactMapViewer mapPanel;
 
     public JPanel buildCenterPanel() {

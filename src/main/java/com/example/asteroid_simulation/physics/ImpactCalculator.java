@@ -169,6 +169,15 @@ public class ImpactCalculator {
         double massLost = (mass0 - m) / mass0 * 100;
         double energyAtmPct = energyDepositedInAtm / Ek0 * 100;
 
+        System.out.printf(
+                "E=%.3f Mt  total=%.2f heavy=%.2f glass=%.2f wave=%.2f%n",
+                E_MT,
+                r_total,
+                r_heavy,
+                r_glass,
+                r_wave
+        );
+
         return new ImpactResult(
                 diameterM,
                 velKms,
