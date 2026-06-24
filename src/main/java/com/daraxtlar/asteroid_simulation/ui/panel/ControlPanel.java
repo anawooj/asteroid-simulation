@@ -1,8 +1,8 @@
-package com.example.asteroid_simulation.ui.panel;
+package com.daraxtlar.asteroid_simulation.ui.panel;
 
-import com.example.asteroid_simulation.model.Composition;
-import com.example.asteroid_simulation.ui.common.RoundedBorder;
-import com.example.asteroid_simulation.ui.common.SectionLabel;
+import com.daraxtlar.asteroid_simulation.model.Composition;
+import com.daraxtlar.asteroid_simulation.ui.common.RoundedBorder;
+import com.daraxtlar.asteroid_simulation.ui.common.SectionLabel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;

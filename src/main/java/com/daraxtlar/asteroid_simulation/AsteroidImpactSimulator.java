@@ -1,6 +1,6 @@
-package com.example.asteroid_simulation;
+package com.daraxtlar.asteroid_simulation;
 
-import com.example.asteroid_simulation.ui.WindowInit;
+import com.daraxtlar.asteroid_simulation.ui.WindowInit;
 
 import javax.swing.*;
 

@@ -1,10 +1,10 @@
-package com.example.asteroid_simulation.physics;
+package com.daraxtlar.asteroid_simulation.physics;
 
-import com.example.asteroid_simulation.model.Composition;
-import com.example.asteroid_simulation.model.ImpactResult;
+import com.daraxtlar.asteroid_simulation.model.Composition;
+import com.daraxtlar.asteroid_simulation.model.ImpactResult;
 import org.jxmapviewer.viewer.GeoPosition;
 
-import static com.example.asteroid_simulation.model.Constants.*;
+import static com.daraxtlar.asteroid_simulation.model.Constants.*;
 
 public class ImpactCalculator {
 

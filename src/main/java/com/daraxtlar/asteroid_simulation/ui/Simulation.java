@@ -1,10 +1,10 @@
-package com.example.asteroid_simulation.ui;
+package com.daraxtlar.asteroid_simulation.ui;
 
-import com.example.asteroid_simulation.model.ImpactResult;
-import com.example.asteroid_simulation.physics.ImpactCalculator;
-import com.example.asteroid_simulation.ui.panel.CenterPanel;
-import com.example.asteroid_simulation.ui.panel.ControlPanel;
-import com.example.asteroid_simulation.ui.panel.ResultPanel;
+import com.daraxtlar.asteroid_simulation.model.ImpactResult;
+import com.daraxtlar.asteroid_simulation.physics.ImpactCalculator;
+import com.daraxtlar.asteroid_simulation.ui.panel.CenterPanel;
+import com.daraxtlar.asteroid_simulation.ui.panel.ControlPanel;
+import com.daraxtlar.asteroid_simulation.ui.panel.ResultPanel;
 
 import javax.swing.*;
 

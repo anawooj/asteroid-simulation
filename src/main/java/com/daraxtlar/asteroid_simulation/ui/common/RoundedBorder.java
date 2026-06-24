@@ -1,4 +1,4 @@
-package com.example.asteroid_simulation.ui.common;
+package com.daraxtlar.asteroid_simulation.ui.common;
 
 import javax.swing.border.AbstractBorder;
 import java.awt.*;

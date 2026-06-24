@@ -1,13 +1,12 @@
-package com.example.asteroid_simulation.ui.map;
+package com.daraxtlar.asteroid_simulation.ui.map;
 
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.TileFactoryInfo;
 
-public class EsriSatelliteTileFactory extends DefaultTileFactory {
+public class EsriLabelsTileFactory extends DefaultTileFactory {
 
-    public EsriSatelliteTileFactory() {
+    public EsriLabelsTileFactory() {
         super(INFO);
-
         setThreadPoolSize(8);
     }
 
@@ -30,8 +29,8 @@ public class EsriSatelliteTileFactory extends DefaultTileFactory {
                     int z = getMaximumZoomLevel() - zoom;
 
                     return String.format(
-                            "https://server.arcgisonline.com/ArcGIS/rest/services/" +
-                                    "World_Imagery/MapServer/tile/%d/%d/%d",
+                            "https://services.arcgisonline.com/ArcGIS/rest/services/" +
+                                    "Reference/World_Boundaries_and_Places/MapServer/tile/%d/%d/%d",
                             z,
                             y,
                             x

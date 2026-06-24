@@ -1,4 +1,4 @@
-package com.example.asteroid_simulation.model;
+package com.daraxtlar.asteroid_simulation.model;
 
 public enum Composition {
 

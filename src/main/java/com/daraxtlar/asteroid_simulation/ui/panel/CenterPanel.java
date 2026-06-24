@@ -1,7 +1,7 @@
-package com.example.asteroid_simulation.ui.panel;
+package com.daraxtlar.asteroid_simulation.ui.panel;
 
-import com.example.asteroid_simulation.model.ImpactResult;
-import com.example.asteroid_simulation.ui.map.ImpactMapViewer;
+import com.daraxtlar.asteroid_simulation.model.ImpactResult;
+import com.daraxtlar.asteroid_simulation.ui.map.ImpactMapViewer;
 import org.jxmapviewer.viewer.GeoPosition;
 
 import javax.swing.*;
