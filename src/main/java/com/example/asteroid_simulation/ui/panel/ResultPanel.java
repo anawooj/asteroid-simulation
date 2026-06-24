@@ -10,6 +10,9 @@ import java.awt.*;
 
 public class ResultPanel {
 
+    private static final String PLACEHOLDER =
+            "\n  Ustaw parametry i kliknij\n  [SYMULUJ IMPAKT]\n\n  Program obliczy:\n  • energię kinetyczną\n  • siłę uderzenia\n  • rozmiary stref szkód\n  • ekwiwalent w megaton";
+
     private final JTextArea txtResults = new JTextArea();
 
     // ── Panel wyników (prawy) ────────────────────────────────────────────────
@@ -46,12 +49,18 @@ public class ResultPanel {
         txtResults.setBorder(new EmptyBorder(8, 8, 8, 8));
         txtResults.setLineWrap(true);
         txtResults.setWrapStyleWord(true);
-        txtResults.setText("\n  Ustaw parametry i kliknij\n  [SYMULUJ IMPAKT]\n\n  Program obliczy:\n  • energię kinetyczną\n  • siłę uderzenia\n  • rozmiary stref szkód\n  • ekwiwalent w megaton");
+        txtResults.setText(PLACEHOLDER);
         return txtResults;
     }
 
     public void setResult(ImpactResult result) {
         txtResults.setText(result.toReport());
+        txtResults.setCaretPosition(0);
+    }
+
+    /** Przywraca tekst startowy - wywolywane przy "RESETUJ SYMULACJE". */
+    public void reset() {
+        txtResults.setText(PLACEHOLDER);
         txtResults.setCaretPosition(0);
     }
 }

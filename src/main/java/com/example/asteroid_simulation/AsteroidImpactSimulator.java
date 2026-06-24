@@ -7,9 +7,7 @@ import javax.swing.*;
 public class AsteroidImpactSimulator extends JFrame {
 
     public AsteroidImpactSimulator() {
-        super("Symulator Uderzenia Asteroidy");
-
-        WindowInit wi = new WindowInit();
+        new WindowInit();
     }
 
     static void main(String[] args) {

@@ -37,4 +37,14 @@ public class CenterPanel {
     public void setResult(ImpactResult result) {
         mapPanel.setResult(result);
     }
+
+    /** Chowa marker punktu uderzenia i blokuje wybor nowego miejsca klikniciem. */
+    public void lockImpactPoint() {
+        mapPanel.lockImpactPoint();
+    }
+
+    /** Czysci narysowane strefy skutkow i odblokowuje wybor miejsca uderzenia. */
+    public void resetSimulation() {
+        mapPanel.resetSimulation();
+    }
 }

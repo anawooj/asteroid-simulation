@@ -21,19 +21,18 @@ public class WindowInit extends JFrame {
         ControlPanel controlPanel = new ControlPanel();
         CenterPanel centerPanel = new CenterPanel();
 
-        // WAZNE: build*Panel() musi byc wywolane PRZED utworzeniem Simulation,
-        // bo to wlasnie te metody inicjalizuja wewnetrzne pola (slidery,
-        // mapPanel, pole tekstowe wynikow), z ktorych Simulation pozniej
-        // korzysta poprzez gettery. Wczesniej Simulation byl tworzony w
-        // ControlPanel (przed zbudowaniem pozostalych paneli), co w ogole
-        // sie nie kompilowalo.
         JPanel controlUi = controlPanel.buildControlPanel();
-        JPanel centerUi  = centerPanel.buildCenterPanel();
-        JPanel resultUi  = resultPanel.buildResultPanel();
+        JPanel centerUi = centerPanel.buildCenterPanel();
+        JPanel resultUi = resultPanel.buildResultPanel();
 
         ImpactCalculator calculator = new ImpactCalculator();
         Simulation simulation = new Simulation(controlPanel, centerPanel, resultPanel, calculator);
         controlPanel.setOnSimulate(simulation::runSimulation);
+
+        controlPanel.setOnReset(() -> {
+            centerPanel.resetSimulation();
+            resultPanel.reset();
+        });
 
         add(controlUi, BorderLayout.WEST);
         add(centerUi, BorderLayout.CENTER);
@@ -44,6 +43,8 @@ public class WindowInit extends JFrame {
     }
 
     private void initializeFrame() {
+        setTitle("Symulator Uderzenia Asteroidy");
+
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new BorderLayout(8, 8));
         getContentPane().setBackground(new Color(15, 20, 35));

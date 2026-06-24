@@ -32,6 +32,7 @@ public class Simulation {
     public void runSimulation() {
 
         controlPanel.setSimulationRunning(true);
+        centerPanel.lockImpactPoint();
 
         SwingWorker<ImpactResult, Void> worker =
                 new SwingWorker<>() {
@@ -70,9 +71,5 @@ public class Simulation {
                 };
 
         worker.execute();
-    }
-
-    public ImpactResult getLastResult() {
-        return lastResult;
     }
 }

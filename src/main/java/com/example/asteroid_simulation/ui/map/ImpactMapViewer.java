@@ -21,6 +21,12 @@ public class ImpactMapViewer extends JLayeredPane {
     private final JXMapViewer imageryViewer;
     private final JXMapViewer labelsViewer;
 
+    // NOWE: po kliknieciu "SYMULUJ" mapa zostaje zablokowana - nie da sie
+    // klikniecem ustawic nowego punktu uderzenia, a marker punktu impaktu
+    // jest chwilowo skryty (zostaja tylko narysowane strefy skutkow), dopoki
+    // uzytkownik nie kliknie "RESETUJ SYMULACJE".
+    private boolean locked = false;
+
     public ImpactMapViewer() {
 
         imageryViewer = new JXMapViewer();
@@ -64,6 +70,13 @@ public class ImpactMapViewer extends JLayeredPane {
         labelsViewer.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+                if (locked) {
+                    // blokada: dopoki symulacja nie zostanie zresetowana,
+                    // klikanie na mapie nie zmienia miejsca uderzenia
+                    return;
+                }
+
                 impactLocation = pointToGeoPosition(e.getPoint());
 
                 repaint();
@@ -84,7 +97,8 @@ public class ImpactMapViewer extends JLayeredPane {
                 g2,
                 imageryViewer,
                 impactLocation,
-                result
+                result,
+                !locked
         );
 
         g2.dispose();
@@ -113,6 +127,21 @@ public class ImpactMapViewer extends JLayeredPane {
 
     public void setResult(ImpactResult result) {
         this.result = result;
+        repaint();
+    }
+
+    /** Wywolywane po kliknieciu "SYMULUJ" - chowa marker punktu uderzenia
+     *  i blokuje wybieranie nowego miejsca klikniciem na mapie. */
+    public void lockImpactPoint() {
+        locked = true;
+        repaint();
+    }
+
+    /** Wywolywane po kliknieciu "RESETUJ SYMULACJE" - usuwa narysowane
+     *  strefy skutkow i odblokowuje wybieranie nowego miejsca uderzenia. */
+    public void resetSimulation() {
+        locked = false;
+        result = null;
         repaint();
     }
 

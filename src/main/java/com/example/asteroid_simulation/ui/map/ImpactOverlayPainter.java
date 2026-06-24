@@ -13,16 +13,19 @@ public class ImpactOverlayPainter {
             Graphics2D g2,
             JXMapViewer map,
             GeoPosition impactLocation,
-            ImpactResult result) {
+            ImpactResult result,
+            boolean showMarker) {
 
         if (impactLocation == null)
             return;
 
-        drawImpactMarker(
-                g2,
-                map,
-                impactLocation
-        );
+        if (showMarker) {
+            drawImpactMarker(
+                    g2,
+                    map,
+                    impactLocation
+            );
+        }
 
         if (result != null) {
 
@@ -102,15 +105,7 @@ public class ImpactOverlayPainter {
                 new GeoPosition(
                         impactLocation.getLatitude(),
                         impactLocation.getLongitude()
-                                + radiusKm /
-                                (
-                                        111.32 *
-                                                Math.cos(
-                                                        Math.toRadians(
-                                                                impactLocation.getLatitude()
-                                                        )
-                                                )
-                                )
+                                + radiusKm / (111.32 * Math.cos(Math.toRadians(impactLocation.getLatitude())))
                 );
 
         Point2D center =
@@ -125,8 +120,7 @@ public class ImpactOverlayPainter {
                                 edge,
                                 map.getZoom());
 
-        double radiusPixels =
-                center.distance(edgePoint);
+        double radiusPixels = center.distance(edgePoint);
 
         int r = (int) radiusPixels;
 

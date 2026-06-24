@@ -12,7 +12,6 @@ public class ImpactResult {
     public final double r_heavy;
     public final double r_glass;
     public final double r_wave;
-    public final String mapView;
     final double latitude;
     final double longitude;
     final double mass0, massImpact, massLostPct;
@@ -36,7 +35,6 @@ public class ImpactResult {
             double r_heavy,
             double r_glass,
             double r_wave,
-            String mapView,
             double energyAtmPct,
             double maxPressureKPa) {
 
@@ -62,8 +60,6 @@ public class ImpactResult {
         this.r_heavy = r_heavy;
         this.r_glass = r_glass;
         this.r_wave = r_wave;
-
-        this.mapView = mapView;
 
         this.energyAtmPct = energyAtmPct;
         this.maxPressureKPa = maxPressureKPa;
@@ -119,9 +115,6 @@ public class ImpactResult {
                         
                         🟢 Odczuw. fala:
                            r = %.1f km
-                        
-                        ── WIDOK MAPY ────────
-                        %s
                         """,
                 latitude,
                 longitude,
@@ -145,10 +138,8 @@ public class ImpactResult {
                 r_total,
                 r_heavy,
                 r_glass,
-                r_wave,
-
-                mapView.toUpperCase()
-        );
+                r_wave
+                );
     }
 
     private String humanMass(double kg) {
@@ -157,54 +148,6 @@ public class ImpactResult {
         if (kg < 1e9) return String.format("%.2f kt", kg / 1e6);
         if (kg < 1e12) return String.format("%.2f Mt", kg / 1e9);
         return String.format("%.3e kg", kg);
-    }
-
-    public double getDiameterM() {
-        return diameterM;
-    }
-
-    public double getVelKms() {
-        return velKms;
-    }
-
-    public double getAngleDeg() {
-        return angleDeg;
-    }
-
-    public Composition getComposition() {
-        return composition;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public double getMass0() {
-        return mass0;
-    }
-
-    public double getMassImpact() {
-        return massImpact;
-    }
-
-    public double getMassLostPct() {
-        return massLostPct;
-    }
-
-    public double getEk0_MT() {
-        return Ek0_MT;
-    }
-
-    public double getE_MT() {
-        return E_MT;
-    }
-
-    public double getCraterKm() {
-        return craterKm;
     }
 
     public double getR_total() {
@@ -221,17 +164,5 @@ public class ImpactResult {
 
     public double getR_wave() {
         return r_wave;
-    }
-
-    public String getMapView() {
-        return mapView;
-    }
-
-    public double getEnergyAtmPct() {
-        return energyAtmPct;
-    }
-
-    public double getMaxPressureKPa() {
-        return maxPressureKPa;
     }
 }

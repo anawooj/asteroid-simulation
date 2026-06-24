@@ -39,23 +39,24 @@ public class ImpactCalculator {
             Composition composition,
             GeoPosition impactLocation) {
 
+        // współrzędne geograficzne
         double latitude = impactLocation.getLatitude();
         double longitude = impactLocation.getLongitude();
 
-        double density = composition.getDensity();
+        double density = composition.getDensity(); // gęstość asteroidy
 
-        // Masa początkowa
-        double radius0 = diameterM / 2.0;
-        double volume0 = (4.0 / 3.0) * Math.PI * radius0 * radius0 * radius0;
-        double mass0 = density * volume0;
+        double radius0 = diameterM / 2.0; // promień asteroidy
+        double volume0 = (4.0 / 3.0) * Math.PI * radius0 * radius0 * radius0; // objętość asteroidy
+        double mass0 = density * volume0; // masa asteroidy
 
-        // Prędkość wejścia i kąt w radianach
-        double v0 = velKms * 1000.0;       // m/s
-        double angleRad = Math.toRadians(angleDeg);
-        double sinTheta = Math.sin(angleRad);
+        // prędkość zbliżania się asteroidy
+        double v0 = velKms * 1000.0;  // km/h -> m/s
+        double Ek0 = 0.5 * mass0 * v0 * v0; // energia kinetyczna przed wejściem w atmosferę
 
-        // Energia kinetyczna przed atmosferą
-        double Ek0 = 0.5 * mass0 * v0 * v0;
+        // kąt, pod którym spadnie na ziemię
+        double angleRad = Math.toRadians(angleDeg); // stopnie -> radiany
+        double sinTheta = Math.sin(angleRad); // sinius tego kąta
+
 
         // ── Całkowanie RK4 przez atmosferę ───────────────────────────────────
         // Stan: [h (wysokość m), v (prędkość m/s), m (masa kg)]
@@ -64,9 +65,9 @@ public class ImpactCalculator {
         //   dv/dt = -F_drag/m - g*sin(theta)
         //   dm/dt = -ablacja (uproszczona)
 
-        double h = ATM_HEIGHT;
-        double v = v0;
-        double m = mass0;
+        double h = ATM_HEIGHT; // wysokość asteroidy przez wejściem w atmosferę
+        double v = v0; // prędkość początkowa
+        double m = mass0; // masa początkowa
         double dt = 0.5; // krok całkowania [s]
 
         double g = G * EARTH_MASS / (EARTH_R * EARTH_R); // ~9.81 m/s²
@@ -76,7 +77,8 @@ public class ImpactCalculator {
         double maxPressure = 0.0; // maksymalne ciśnienie dynamiczne [Pa]
 
         while (h > 0 && v > 100) {
-            // Gęstość powietrza na wysokości h (model barometryczny)
+
+            // gęstość powietrza ze względu na wysokość
             double rhoAir = RHO_AIR_0 * Math.exp(-h / H_SCALE);
 
             // Przekrój poprzeczny (zakładamy sferyczny kształt)
@@ -145,9 +147,6 @@ public class ImpactCalculator {
         double craterRadius = computeCraterRadius(Ek_impact, density);
 
         // ── Strefy zniszczeń (skalowanie wg energii) ─────────────────────────
-        // NAPRAWIONO: 1 megaton TNT = YIELD_TNT [J/t] * 1 000 000 [t],
-        // a nie * 1000 (to dawalo wynik w kilotonach podpisany jako "Mt",
-        // czyli wartosci 1000x za duze).
         double E_MT = Ek_impact / (YIELD_TNT * 1_000_000); // energia w megaton TNT
         double Ek0_MT = Ek0 / (YIELD_TNT * 1_000_000);
 
@@ -157,26 +156,9 @@ public class ImpactCalculator {
         double r_glass = 5.0 * Math.pow(E_MT, 0.33);   // wybite szyby     (>3 kPa)
         double r_wave = 12.0 * Math.pow(E_MT, 0.33);   // fala odczuw.     (>1 kPa)
 
-        // Kategoria widoku mapy
-        double maxR = r_wave;
-        String mapView;
-        if (maxR < 5) mapView = "centrum miasta";
-        else if (maxR < 50) mapView = "całe miasto";
-        else if (maxR < 200) mapView = "województwo";
-        else if (maxR < 1000) mapView = "kraj";
-        else mapView = "Europa";
-
         double massLost = (mass0 - m) / mass0 * 100;
         double energyAtmPct = energyDepositedInAtm / Ek0 * 100;
 
-        System.out.printf(
-                "E=%.3f Mt  total=%.2f heavy=%.2f glass=%.2f wave=%.2f%n",
-                E_MT,
-                r_total,
-                r_heavy,
-                r_glass,
-                r_wave
-        );
 
         return new ImpactResult(
                 diameterM,
@@ -195,7 +177,6 @@ public class ImpactCalculator {
                 r_heavy,
                 r_glass,
                 r_wave,
-                mapView,
                 energyAtmPct,
                 maxPressure / 1000.0
         );
