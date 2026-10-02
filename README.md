@@ -203,7 +203,7 @@ The simulation is an educational and computational model and uses several physic
 
 To build and run the project, the following are required:
 
-* Java **17**
+* Java **21 or newer**
 * Maven
 * Internet access while the application is running because map tiles are loaded from ESRI services
 
@@ -214,20 +214,14 @@ To build and run the project, the following are required:
 Clone the repository:
 
 ```bash
-git clone <repository-url>
-cd <repository-directory>
+git clone https://github.com/anawooj/asteroid-simulation.git
+cd asteroid-simulation
 ```
 
-Build the project:
+Build and run the project:
 
 ```bash
-mvn clean install
-```
-
-Then start the application using the configured main class:
-
-```text
-AsteroidImpactSimulator
+mvn clean compile exec:java
 ```
 
 <br />
